@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.text-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* .text-boxes div {
+    flex: 0 0 100%;
+} */
+
+.text-boxes label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #555;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #444;
+}
+
+tr:nth-child(odd) {
+    background-color: #333;
+}
+
+tr:hover {
+    background-color: #555;
+}
+
+#swapButton {
+    padding: 0px 10px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    height: 34px;
+}
+
+#swapButton:hover {
+    background-color: #333; /* Hover color */
+}
+
+

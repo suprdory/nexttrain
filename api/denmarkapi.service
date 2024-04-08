@@ -1,0 +1,11 @@
+[Unit]
+Description=uvicorn server for denmark
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+WorkingDirectory=/hdd/userdata/suprdory/projects/denmark/api
+ExecStart=/hdd/userdata/suprdory/projects/denmark/api/.venv/bin/uvicorn main:app --port 8005 --host 192.168.1.10 --ssl-keyfile=/etc/letsencrypt/live/meow.suprdory.com/privkey.pem --ssl-certfile=/etc/letsencrypt/live/meow.suprdory.com/fullchain.pem
+
+[Install]
+WantedBy=multi-user.target

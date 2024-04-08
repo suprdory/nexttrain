@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Data Table</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Departure Board</h1>
+        <div class="text-boxes">
+            <div>
+                <label for="input1">From: </label>
+                <input type="text" id="input1" maxlength="3">
+            </div>
+            <div>
+            <label for="swapButton">Swap</label>
+            <button id="swapButton"><i class="material-icons">swap_horiz</i></button>
+        </div>
+            <div>
+                <label for="input2">To: </label>
+                <input type="text" id="input2" maxlength="3">
+            </div>
+        </div>
+
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <!-- Table headers will be dynamically generated -->
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Data will be displayed here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
