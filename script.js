@@ -52,6 +52,7 @@ function swapValues() {
 }
 
 function fetchData() {
+    clearTable();
     const input1Value = document.getElementById('input1').value;
     const input2Value = document.getElementById('input2').value;
 
@@ -65,9 +66,13 @@ function fetchData() {
     });
 }
 
-function displayData(data) {
+function clearTable(){
     const tableBody = document.getElementById('table-body');
     tableBody.innerHTML = ''; // Clear previous data
+}
+
+function displayData(data) {
+    const tableBody = document.getElementById('table-body');
 
     const tableHeaders = Object.keys(data[0]); // Get the keys of the first object to use as table headers
 
