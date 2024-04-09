@@ -4,10 +4,14 @@ body {
     color: #fff;
 }
 
+h1{
+    font-size: x-large;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
 }
 
 .text-boxes {
@@ -34,7 +38,7 @@ input[type="text"] {
 }
 
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
 }

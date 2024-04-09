@@ -53,13 +53,17 @@ function swapValues() {
 
 function fetchData() {
     clearTable();
+    clearNames();
     const input1Value = document.getElementById('input1').value;
     const input2Value = document.getElementById('input2').value;
 
     fetch(`https://meow.suprdory.com:8005/board/${input1Value}/${input2Value}`)
+    // fetch(`http://192.168.1.10:8000/board/${input1Value}/${input2Value}`)
     .then(response => response.json())
     .then(data => {
-        displayData(data);
+        console.log(data)
+        displayData(data.board);
+        displayNames(data.from_station,data.to_station);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
@@ -70,10 +74,17 @@ function clearTable(){
     const tableBody = document.getElementById('table-body');
     tableBody.innerHTML = ''; // Clear previous data
 }
+function displayNames(name1,name2){
+    const names = document.getElementById('station_names');
+    names.textContent=name1+ ' → ' +name2;
+}
+function clearNames(){
+    const names = document.getElementById('station_names');
+    names.textContent='';
+}
 
 function displayData(data) {
     const tableBody = document.getElementById('table-body');
-
     const tableHeaders = Object.keys(data[0]); // Get the keys of the first object to use as table headers
 
     // Dynamically generate table headers
