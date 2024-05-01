@@ -84,6 +84,7 @@ function clearNames(){
 }
 
 function displayData(data) {
+    clearTable();
     const tableBody = document.getElementById('table-body');
     const tableHeaders = Object.keys(data[0]); // Get the keys of the first object to use as table headers
 
