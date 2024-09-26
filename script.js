@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Load stored values from localStorage
     loadStoredValues();
 
@@ -26,12 +26,12 @@ function loadStoredValues() {
     }
 
     // Add event listeners to inputs to update localStorage when changed
-    input1.addEventListener('input', function() {
+    input1.addEventListener('input', function () {
         localStorage.setItem('input1', input1.value);
         fetchData(); // Fetch data whenever input changes
     });
 
-    input2.addEventListener('input', function() {
+    input2.addEventListener('input', function () {
         localStorage.setItem('input2', input2.value);
         fetchData(); // Fetch data whenever input changes
     });
@@ -58,53 +58,68 @@ function fetchData() {
     const input2Value = document.getElementById('input2').value;
 
     fetch(`https://meow.suprdory.com:8005/board/${input1Value}/${input2Value}`)
-    // fetch(`http://192.168.1.10:8000/board/${input1Value}/${input2Value}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        displayData(data.board);
-        displayNames(data.from_station,data.to_station);
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
+        // fetch(`http://192.168.1.10:8000/board/${input1Value}/${input2Value}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            displayData(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            displayDataError()
+        });
 }
 
-function clearTable(){
+function clearTable() {
     const tableBody = document.getElementById('table-body');
     tableBody.innerHTML = ''; // Clear previous data
 }
-function displayNames(name1,name2){
+function displayNames(name1, name2) {
     const names = document.getElementById('station_names');
-    names.textContent=name1+ ' → ' +name2;
+    names.textContent = name1 + ' → ' + name2;
 }
-function clearNames(){
+function clearNames() {
     const names = document.getElementById('station_names');
-    names.textContent='';
+    names.textContent = '';
+}
+function displayDataError() {
+    const names = document.getElementById('station_names');
+    names.textContent = 'Error fetching data';
+}
+function displayNoTrains() {
+    const names = document.getElementById('station_names');
+    names.textContent = 'There are no trains. Bad luck.';
 }
 
 function displayData(data) {
     clearTable();
-    const tableBody = document.getElementById('table-body');
-    const tableHeaders = Object.keys(data[0]); // Get the keys of the first object to use as table headers
+    if (data.board.length == 0) {
+        displayNoTrains()
+    }
+    else {
+        displayNames(data.from_station, data.to_station);
+        const tableBody = document.getElementById('table-body');
+        const tableHeaders = Object.keys(data.board[0]); // Get the keys of the first object to use as table headers
 
-    // Dynamically generate table headers
-    const headerRow = document.createElement('tr');
-    tableHeaders.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
-    tableBody.appendChild(headerRow);
-
-    // Populate table with data
-    data.forEach(item => {
-        const row = document.createElement('tr');
+        // Dynamically generate table headers
+        const headerRow = document.createElement('tr');
         tableHeaders.forEach(header => {
-            const td = document.createElement('td');
-            td.textContent = item[header];
-            row.appendChild(td);
+            const th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
         });
-        tableBody.appendChild(row);
-    });
+        tableBody.appendChild(headerRow);
+
+        // Populate table with data
+        data.board.forEach(item => {
+            const row = document.createElement('tr');
+            tableHeaders.forEach(header => {
+                const td = document.createElement('td');
+                td.textContent = item[header];
+                row.appendChild(td);
+            });
+            tableBody.appendChild(row);
+        });
+    }
+
 }
