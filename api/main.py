@@ -18,6 +18,7 @@ api_key=config['API_KEY']
 app = FastAPI()
 
 origins = [
+    "http://localhost:5500",
     "https://suprdory.github.io",
     "http://127.0.0.1:5500",
     "https://suprdory.com",
@@ -52,13 +53,16 @@ async def getboard(dep_crs,dest_crs):
                 sched_arr_at_dest=deet.st
                 est_arr_at_dest=deet.et
                 to_station=deet.location_name
+        final_destination=deets[-1].location_name
 
         nd={'Dep':service.std,
             'Est':service.etd,
             'Arr':sched_arr_at_dest,
             'Stat':est_arr_at_dest,
             'Plat':service.platform,
-            'Operator':service.operator_name,}
+            'Operator':service.operator_name,
+            'Final': final_destination,
+            }
         service_dicts.append(nd)
     df=pd.DataFrame(service_dicts)
     print(df)
