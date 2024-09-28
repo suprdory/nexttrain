@@ -179,6 +179,9 @@ function msecsToString(mseconds) {
     if (interval > 2){
         return Math.floor(interval) + " minutes";
     }
+    if (seconds < 1){
+        return "0 seconds";
+    }
     if (seconds < 2){
         return "1 second";
     }
