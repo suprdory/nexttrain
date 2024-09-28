@@ -1,3 +1,4 @@
+let lastUpdateTime = 0
 document.addEventListener("DOMContentLoaded", function () {
     // Load stored values from localStorage
     loadStoredValues();
@@ -8,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listener to swap button
     document.getElementById('swapButton').addEventListener('click', swapValues);
 });
+setInterval(display_last_updated,1000)
+
 
 function loadStoredValues() {
     const input1 = document.getElementById('input1');
@@ -52,6 +55,8 @@ function swapValues() {
 }
 
 function fetchData() {
+    lastUpdateTime=0;
+    display_last_updated()
     clearTable();
     clearNames();
     const input1Value = document.getElementById('input1').value;
@@ -63,10 +68,13 @@ function fetchData() {
         .then(data => {
             console.log(data)
             displayData(data);
+            
+
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             displayDataError()
+
         });
 }
 
@@ -77,21 +85,38 @@ function clearTable() {
 function displayNames(name1, name2) {
     const names = document.getElementById('station_names');
     names.textContent = name1 + ' → ' + name2;
+
 }
+function display_last_updated() {
+    const updated = document.getElementById('last_updated');
+    if (lastUpdateTime==0){
+        updated.textContent = 'Updating...' ;
+    }
+    else{
+    let currentTime = Date.now()
+    let timeSinceUpdate = (currentTime - lastUpdateTime)
+    let timeSinceUpdateString = msecsToString(timeSinceUpdate)
+    updated.textContent = 'Last Updated ' + timeSinceUpdateString + ' ago.' ;
+}}
+
+
 function clearNames() {
     const names = document.getElementById('station_names');
     names.textContent = '';
 }
 function displayDataError() {
     const names = document.getElementById('station_names');
-    names.textContent = 'Error fetching data';
+    names.textContent = 'Error fetching data.';
+    lastUpdateTime=Date.now()
+    display_last_updated()
 }
 function displayNoTrains() {
     const names = document.getElementById('station_names');
-    names.textContent = 'There are no trains. Bad luck.';
+    names.textContent = 'There are no trains.';
 }
 
 function displayData(data) {
+    lastUpdateTime=Date.now()
     clearTable();
     if (data.board.length == 0) {
         displayNoTrains()
@@ -121,5 +146,38 @@ function displayData(data) {
             tableBody.appendChild(row);
         });
     }
+    
+    display_last_updated()
 
+}
+
+function msecsToString(mseconds) {
+
+    // var seconds = Math.floor((new Date() - date) / 1000);
+    var seconds=mseconds/1000
+    var interval = seconds / 31536000;
+
+    if (interval > 1) {
+        return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+        return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+        return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1.5) {
+        return Math.round(interval) + " hours";
+    }
+    if (interval > 10) {
+        return Math.round(interval) + " hour";
+    }
+    interval = seconds / 60;
+    if (interval > 2){
+        return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
 }
