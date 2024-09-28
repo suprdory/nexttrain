@@ -168,16 +168,19 @@ function msecsToString(mseconds) {
     if (interval > 1) {
         return Math.floor(interval) + " days";
     }
-    interval = seconds / 3600;
+    interval = seconds / 3600; //hours
     if (interval > 1.5) {
         return Math.round(interval) + " hours";
     }
-    if (interval > 10) {
-        return Math.round(interval) + " hour";
-    }
-    interval = seconds / 60;
+    // if (interval > 10) {
+    //     return Math.round(interval) + " hour";
+    // }
+    interval = seconds / 60; // minutes
     if (interval > 2){
         return Math.floor(interval) + " minutes";
+    }
+    if (seconds < 2){
+        return "1 second";
     }
     return Math.floor(seconds) + " seconds";
 }
