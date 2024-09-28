@@ -30,12 +30,14 @@ function loadStoredValues() {
 
     // Add event listeners to inputs to update localStorage when changed
     input1.addEventListener('input', function () {
-        localStorage.setItem('input1', input1.value);
+        this.value=this.value.toUpperCase();
+        localStorage.setItem('input1', this.value);
         fetchData(); // Fetch data whenever input changes
     });
 
     input2.addEventListener('input', function () {
-        localStorage.setItem('input2', input2.value);
+        this.value=this.value.toUpperCase();
+        localStorage.setItem('input2', this.value);
         fetchData(); // Fetch data whenever input changes
     });
 }
@@ -130,7 +132,15 @@ function displayData(data) {
         const headerRow = document.createElement('tr');
         tableHeaders.forEach(header => {
             const th = document.createElement('th');
-            th.textContent = header;
+            let headerTxt=header
+            if (header=='Est' || header=='Stat'){
+                headerTxt='Status'
+            }
+            if (header=='Final'){
+                headerTxt='Final Dest'
+            }
+
+            th.textContent = headerTxt;
             headerRow.appendChild(th);
         });
         tableBody.appendChild(headerRow);
@@ -141,7 +151,15 @@ function displayData(data) {
             tableHeaders.forEach(header => {
                 const td = document.createElement('td');
                 td.textContent = item[header];
+                if (item['Est']!='On time' & header=='Dep'){
+                    td.classList.add("delayed");
+                }
+                if (item['Stat']!='On time' & header=='Arr'){
+                    td.classList.add("delayed");
+                }
+
                 row.appendChild(td);
+
             });
             tableBody.appendChild(row);
         });
