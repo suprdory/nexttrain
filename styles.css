@@ -33,7 +33,7 @@ h1{
 }
 
 input[type="text"] {
-    width: 80px;
+    width: 130px;
     padding: 8px;
     border: 1px solid #444;
     background-color: #333;
@@ -88,3 +88,17 @@ tr:hover {
 }
 
 
+/* Style for the search dropdown */
+.results {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+}
+.results div {
+    padding: 10px;
+    cursor: pointer;
+}
+.results div:hover {
+    background-color: #f0f0f0;
+}

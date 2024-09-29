@@ -15,8 +15,11 @@
         <h1>Next trains</h1>
         <div class="text-boxes">
             <div>
-                <label for="input1">From: </label>
-                <input type="text" id="input1" maxlength="3">
+                <label for="input1"  >From: </label>
+                <input type="text" id="input1" onkeyup="searchStations('input1','results1','crs1')">
+                <div id="results1" class=results></div>
+                <div id="crs1" class=results></div>
+
             </div>
             <div>
             <label for="swapButton">Swap</label>
@@ -24,7 +27,9 @@
         </div>
             <div>
                 <label for="input2">To: </label>
-                <input type="text" id="input2" maxlength="3">
+                <input type="text" id="input2" onkeyup="searchStations('input2','results2','crs2')">
+                <div id="results2" class="results"></div>
+                <div id="crs2" class=results></div>
             </div>
         </div>
         <div id="station_names">
