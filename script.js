@@ -182,7 +182,7 @@ function displayData(data) {
           if (item["Est"] == "On time") {
             td.textContent = "On time";
           } else if (item["Est"] == "Cancelled") {
-            td.textContent = "Cancelled";
+            td.innerHTML = "<a class='warning'>"+"Cancelled"+ "</a>";
           } else {
             td.textContent = "Delayed";
           }
@@ -191,17 +191,23 @@ function displayData(data) {
         if (header == "Dep") {
           if (item["Est"] == "On time") {
             td.textContent = item["Dep"];
+          } else if (item["Est"] == "Cancelled") {
+            td.innerHTML = "<a class='strike'>" + item["Dep"] + "</a>";
           } else {
             td.innerHTML =
-              "<a class='delayed'>" + item["Dep"] + "</a>" + " " + item["Est"];
+              "<a class='strike'>" + item["Dep"] + "</a>" + " " + item["Est"];
           }
         }
         if (header == "Arr") {
           if (item["Stat"] == "On time") {
             td.textContent = item["Arr"];
-          } else {
+          }
+          else if(item["Stat"] == "Cancelled") {
+             td.innerHTML = "<a class='strike'>" + item["Arr"] + "</a>";
+          }
+          else {
             td.innerHTML =
-              "<a class='delayed'>" + item["Arr"] + "</a>" + " " + item["Stat"];
+              "<a class='strike'>" + item["Arr"] + "</a>" + " " + item["Stat"];
           }
         }
 

@@ -54,10 +54,15 @@ th, td {
     text-align: left;
 
 }
-.delayed{
+.strike{
     text-decoration-style: solid;
     text-decoration: line-through;
-    color: crimson;
+    color: rgb(219, 58, 90);
+}
+.warning{
+    /* text-decoration-style: solid; */
+    /* text-decoration: line-through; */
+    color: rgb(219, 58, 90);
 }
 
 th {
