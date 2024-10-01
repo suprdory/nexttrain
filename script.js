@@ -42,7 +42,6 @@ function loadStoredValues() {
     input2.value = `${storedValue2.name} (${storedValue2.crs})`;
     crs2.value = storedValue2.crs;
   }
-
 }
 
 function swapValues() {
@@ -72,10 +71,10 @@ function fetchData() {
   const input1Value = document.getElementById("crs1").value;
   const input2Value = document.getElementById("crs2").value;
 
-  log("Fetching",input1Value,input2Value)
+  log("Fetching", input1Value, input2Value);
   log(Boolean(input1Value), Boolean(input2Value));
 
-  if ((Boolean(input1Value) & Boolean(input2Value))) {
+  if (Boolean(input1Value) & Boolean(input2Value)) {
     lastUpdateTime = 0;
     updateRequested = true;
     display_last_updated();
@@ -141,20 +140,24 @@ function displayData(data) {
   } else {
     displayNames(data.from_station, data.to_station);
     const tableBody = document.getElementById("table-body");
-    const tableHeaders = Object.keys(data.board[0]); // Get the keys of the first object to use as table headers
+    // const tableHeaders = Object.keys(data.board[0]); // Get the keys of the first object to use as table headers
 
+    const requestHeaders = [
+      "Status",
+      "Dep",
+      "Arr",
+      "Est",
+      "Stat",
+      "Plat",
+      "Operator",
+      "Final",
+    ];
+    const tableHeaders = ["Status", "Dep", "Arr", "Plat", "Dest", "Operator"];
     // Dynamically generate table headers
     const headerRow = document.createElement("tr");
     tableHeaders.forEach((header) => {
       const th = document.createElement("th");
       let headerTxt = header;
-      if (header == "Est" || header == "Stat") {
-        headerTxt = "Status";
-      }
-      if (header == "Final") {
-        headerTxt = "Final Dest";
-      }
-
       th.textContent = headerTxt;
       headerRow.appendChild(th);
     });
@@ -165,12 +168,41 @@ function displayData(data) {
       const row = document.createElement("tr");
       tableHeaders.forEach((header) => {
         const td = document.createElement("td");
-        td.textContent = item[header];
-        if ((item["Est"] != "On time") & (header == "Dep")) {
-          td.classList.add("delayed");
+        if (header == "Operator") {
+          td.textContent = item["Operator"];
         }
-        if ((item["Stat"] != "On time") & (header == "Arr")) {
-          td.classList.add("delayed");
+        if (header == "Plat") {
+          td.textContent = item["Plat"];
+        }
+        if (header == "Dest") {
+          td.textContent = item["Final"];
+        }
+
+        if (header == "Status") {
+          if (item["Est"] == "On time") {
+            td.textContent = "On time";
+          } else if (item["Est"] == "Cancelled") {
+            td.textContent = "Cancelled";
+          } else {
+            td.textContent = "Delayed";
+          }
+        }
+
+        if (header == "Dep") {
+          if (item["Est"] == "On time") {
+            td.textContent = item["Dep"];
+          } else {
+            td.innerHTML =
+              "<a class='delayed'>" + item["Dep"] + "</a>" + " " + item["Est"];
+          }
+        }
+        if (header == "Arr") {
+          if (item["Stat"] == "On time") {
+            td.textContent = item["Arr"];
+          } else {
+            td.innerHTML =
+              "<a class='delayed'>" + item["Arr"] + "</a>" + " " + item["Stat"];
+          }
         }
 
         row.appendChild(td);
