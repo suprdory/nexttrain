@@ -90,15 +90,18 @@ tr:hover {
 
 /* Style for the search dropdown */
 .results {
-    border: 1px solid #ccc;
+    border: 1px solid #494949;
     max-height: 150px;
     overflow-y: auto;
     display: none;
+    scrollbar-color: #555 #333;
 }
 .results div {
     padding: 10px;
     cursor: pointer;
+
 }
 .results div:hover {
-    background-color: #f0f0f0;
+    background-color: #333333;
+
 }
