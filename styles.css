@@ -57,12 +57,12 @@ th, td {
 .strike{
     text-decoration-style: solid;
     text-decoration: line-through;
-    color: rgb(219, 58, 90);
+    color: rgb(219, 74, 103);
 }
 .warning{
     /* text-decoration-style: solid; */
     /* text-decoration: line-through; */
-    color: rgb(219, 58, 90);
+    color: rgb(219, 74, 103);
 }
 
 th {
