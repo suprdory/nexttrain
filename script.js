@@ -1,6 +1,6 @@
 log = console.log;
 let lastUpdateTime = 0;
-let updated = false;
+let updateRequested = false;
 
 document.addEventListener("DOMContentLoaded", function () {
   // Load stored values from localStorage
@@ -37,26 +37,12 @@ function loadStoredValues() {
   if (storedValue1) {
     input1.value = `${storedValue1.name} (${storedValue1.crs})`;
     crs1.value = storedValue1.crs;
-    input1set = true;
   }
   if (storedValue2) {
     input2.value = `${storedValue2.name} (${storedValue2.crs})`;
     crs2.value = storedValue2.crs;
-    input2set = true;
   }
 
-  // // Add event listeners to inputs to update localStorage when changed
-  // input1.addEventListener('input', function () {
-  //     // this.value = this.value.toUpperCase();
-  //     // localStorage.setItem('input1', this.value);
-  //     // fetchData(); // Fetch data whenever input changes
-  // });
-
-  // input2.addEventListener('input', function () {
-  //     this.value = this.value.toUpperCase();
-  //     localStorage.setItem('input2', this.value);
-  //     // fetchData(); // Fetch data whenever input changes
-  // });
 }
 
 function swapValues() {
@@ -86,8 +72,12 @@ function fetchData() {
   const input1Value = document.getElementById("crs1").value;
   const input2Value = document.getElementById("crs2").value;
 
-  if ((input1Value.length == 3) & (input1Value.length == 3)) {
+  log("Fetching",input1Value,input2Value)
+  log(Boolean(input1Value), Boolean(input2Value));
+
+  if ((Boolean(input1Value) & Boolean(input2Value))) {
     lastUpdateTime = 0;
+    updateRequested = true;
     display_last_updated();
     clearTable();
     clearNames();
@@ -117,7 +107,7 @@ function displayNames(name1, name2) {
 function display_last_updated() {
   const updated = document.getElementById("last_updated");
   if (lastUpdateTime == 0) {
-    if (updated) {
+    if (updateRequested) {
       updated.textContent = "Updating...";
     }
   } else {
