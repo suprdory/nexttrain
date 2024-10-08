@@ -16,7 +16,7 @@
         <div class="text-boxes">
             <div>
                 <label for="input1"  >From: </label>
-                <input type="text" id="input1" onkeyup="searchStations('input1','results1','crs1')">
+                <input type="text" id="input1" onkeyup="searchStations('input1','results1','crs1')" onclick="this.select();">
                 <div id="results1" class=results></div>
                 <div id="crs1" class=results></div>
 
@@ -27,7 +27,7 @@
         </div>
             <div>
                 <label for="input2">To: </label>
-                <input type="text" id="input2" onkeyup="searchStations('input2','results2','crs2')">
+                <input type="text" id="input2" onkeyup="searchStations('input2','results2','crs2')" onclick="this.select();">
                 <div id="results2" class="results"></div>
                 <div id="crs2" class=results></div>
             </div>

@@ -11,7 +11,7 @@ h1{
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 0px;
 }
 
 .text-boxes {
@@ -23,9 +23,6 @@ h1{
     /* padding-right: 20px; */
 }
 
-/* .text-boxes div {
-    flex: 0 0 100%;
-} */
 
 .text-boxes label {
     display: block;
@@ -38,6 +35,9 @@ input[type="text"] {
     border: 1px solid #444;
     background-color: #333;
     color: #fff;
+    /* user-select: all;
+    -moz-user-select: all;
+    -webkit-user-select: all; */
     /* text-transform: uppercase */
 }
 
@@ -64,6 +64,7 @@ th, td {
     /* text-decoration: line-through; */
     color: rgb(219, 74, 103);
 }
+
 
 th {
     background-color: #444;
