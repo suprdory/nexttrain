@@ -101,7 +101,7 @@ function clearTable() {
 }
 function displayNames(name1, name2) {
   const names = document.getElementById("station_names");
-  names.textContent = name1 + " → " + name2;
+  names.textContent ="Displaying: " + name1 + " → " + name2;
 }
 function display_last_updated() {
   const updated = document.getElementById("last_updated");
@@ -170,6 +170,7 @@ function displayData(data) {
         const td = document.createElement("td");
         if (header == "Operator") {
           td.textContent = item["Operator"];
+          td.classList.add('breakword')
         }
         if (header == "Plat") {
           td.textContent = item["Plat"];

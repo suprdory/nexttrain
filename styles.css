@@ -12,6 +12,7 @@ h1{
     max-width: 800px;
     margin: 0 auto;
     padding: 0px;
+    /* display: table */
 }
 
 .text-boxes {
@@ -27,6 +28,9 @@ h1{
 .text-boxes label {
     display: block;
     margin-bottom: 5px;
+}
+.breakword{
+    word-break: break-word;
 }
 
 input[type="text"] {
@@ -46,12 +50,17 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     margin-bottom:10px;
+    font-size:small;
+    /* word-break: break-word; */
+    /* table-layout: fixed */
+    /* overflow-wrap: break-word; */
 }
 
 th, td {
     border: 1px solid #555;
-    padding: 8px;
-    text-align: left;
+    padding:10px 3px 10px 3px;
+    text-align: center;
+    overflow-wrap: break-word;
 
 }
 .strike{
