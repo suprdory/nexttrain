@@ -66,7 +66,8 @@ function swapValues() {
 
   fetchData(); // Fetch data after swapping values
 }
-
+const apiurl ='https://qz5e6g4io6qt3257bzn374o5ie0nukex.lambda-url.eu-west-2.on.aws'
+// const apiurl = 'https://meow.suprdory.com:8005'
 function fetchData() {
   const input1Value = document.getElementById("crs1").value;
   const input2Value = document.getElementById("crs2").value;
@@ -81,7 +82,7 @@ function fetchData() {
     clearTable();
     clearNames();
 
-    fetch(`https://meow.suprdory.com:8005/board/${input1Value}/${input2Value}`)
+    fetch(apiurl + `/board/${input1Value}/${input2Value}`)
       // fetch(`http://192.168.1.10:8000/board/${input1Value}/${input2Value}`)
       .then((response) => response.json())
       .then((data) => {
@@ -173,6 +174,7 @@ function displayData(data) {
           td.classList.add('breakword')
         }
         if (header == "Plat") {
+          td.classList.add("mediumfontsize")
           td.textContent = item["Plat"];
         }
         if (header == "Dest") {
@@ -190,6 +192,7 @@ function displayData(data) {
         }
 
         if (header == "Dep") {
+          td.classList.add("mediumfontsize")
           if (item["Est"] == "On time") {
             td.textContent = item["Dep"];
           } else if (item["Est"] == "Cancelled") {
@@ -200,6 +203,7 @@ function displayData(data) {
           }
         }
         if (header == "Arr") {
+          td.classList.add("mediumfontsize")
           if (item["Stat"] == "On time") {
             td.textContent = item["Arr"];
           }

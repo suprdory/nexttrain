@@ -32,6 +32,9 @@ h1{
 .breakword{
     word-break: break-word;
 }
+.mediumfontsize{
+    font-size: medium;
+}
 
 input[type="text"] {
     width: 130px;
