@@ -1,7 +1,7 @@
 # import json
 # from fastapi.encoders import jsonable_encoder
 from nredarwin.webservice import DarwinLdbSession
-import pandas as pd
+# import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 # import json
@@ -64,20 +64,20 @@ async def getboard(dep_crs,dest_crs):
             'Final': final_destination,
             }
         service_dicts.append(nd)
-    df=pd.DataFrame(service_dicts)
-    print(df)
+    # df=pd.DataFrame(service_dicts)
+    # print(df)
         # jsonstr=df.to_json(orient='records')
         # json_obj=json.loads(jsonstr)
         # print(json_obj)
         # # json={"message":"json test"}
         # return json_obj
 
-    board_dict=df.to_dict(orient='records')
+    # board_dict=df.to_dict(orient='records')
 
     ret_dict={}
     ret_dict['from_station']=board.location_name
     ret_dict['to_station']=to_station
-    ret_dict['board']=board_dict
+    ret_dict['board']=service_dicts
 
     print(ret_dict)
     return ret_dict

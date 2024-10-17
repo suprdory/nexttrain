@@ -52,17 +52,18 @@ for service in board.train_services:
         'Plat.':service.platform,
         'Operator':service.operator_name,}
     service_dicts.append(nd)
-df=pd.DataFrame(service_dicts)
-print(df)
+# df=pd.DataFrame(service_dicts)
+# print(df)
 
-board_dict=df.to_dict(orient='records')
+# board_dict=df.to_dict(orient='records')
 
 ret_dict={}
 ret_dict['from_station']=board.location_name
 ret_dict['to_station']=to_station
-ret_dict['board']=board_dict
+ret_dict['board']=service_dicts
 
 
 print(ret_dict)
 
 # %%
+service_dicts
